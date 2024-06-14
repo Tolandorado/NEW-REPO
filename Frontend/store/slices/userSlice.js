@@ -5,7 +5,7 @@ const initialState = {
   name: null,
   id: null,
   error: null,
-  status: "none",
+  access: false,
 };
 
 const userSlice = createSlice({
@@ -15,6 +15,7 @@ const userSlice = createSlice({
     setUser(state, action) {
         state.id = action.payload.id;
         state.name = action.payload.name;
+        state.access = true;
     }
 
   },

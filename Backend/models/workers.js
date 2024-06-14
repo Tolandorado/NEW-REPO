@@ -13,7 +13,8 @@ module.exports = function( sequelize ) {
           password: {
             type: DataTypes.STRING,
           },
-        }).sync({force: true});
-        
+        }, {
+        timestamps: false
+      }).sync({force: true});   
 }
  

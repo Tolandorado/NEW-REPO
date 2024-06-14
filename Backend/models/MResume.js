@@ -19,7 +19,8 @@ module.exports = function( sequelize ) {
           text: {
             type: DataTypes.TEXT,
           },
-        }).sync({force: true});
-        
+        }, {
+          timestamps: false
+        }).sync({force: true});        
 }
  

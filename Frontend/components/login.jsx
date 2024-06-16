@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../store/slices/userSlice'; // Импортируем action для обновления состояния
 import { Link } from 'react-router-dom';
 
-const Register = () => {
+const Login = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const Register = () => {
     e.preventDefault();
     try {
       // Отправить запрос на сервер для регистрации пользователя
-      const response = await fetch('http://localhost:3000/register', {
+      const response = await fetch('http://localhost:3000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,15 +29,15 @@ const Register = () => {
         // Перенаправить на другую страницу или обновить текущую
         // Например, history.push('/profile');
       } else {
-        console.error('Ошибка регистрации:', await response.json());
+        console.error('Ошибка входа:', await response.json());
       }
     } catch (error) {
-      console.error('Ошибка регистрации:', error);
+      console.error('Ошибка входа:', error);
     }
   };
 
   return (
- <>
+    <>
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="name">Имя:</label>
@@ -57,11 +57,11 @@ const Register = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button type="submit">Зарегистрироваться</button>
+      <button type="submit">Войти</button>
     </form>
-   <Link to="/login">Вход</Link>
- </>
+    <Link to="/register">Регистрация</Link>
+    </>
   );
 };
 
-export default Register;
+export default Login;

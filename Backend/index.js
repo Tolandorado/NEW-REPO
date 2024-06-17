@@ -28,6 +28,26 @@ const workers = sequelize.define('workers', {
   }
 });
 
+const resumes = sequelize.define('resumes', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  workerId: {
+    type: DataTypes.INTEGER,
+  },
+  workerName: {
+    type: DataTypes.STRING,
+  },
+  skills: {
+    type: DataTypes.ARRAY(DataTypes.STRING),
+  },
+  text: {
+    type: DataTypes.TEXT,
+  },
+});
+
 // Создание таблицы в базе данных
 const startServer = async () => {
   try {
@@ -99,6 +119,30 @@ const startServer = async () => {
         console.error({message: "я лох("})
       }
     })
+  
+    //Маршрут для создания резюме
+    app.post('/add-resume', async (req, res) => {
+      const {workerId, workerName, skills, text} = req.body
+      try {
+        const newResume = await resumes.create({workerId, workerName, skills, text})
+        res.status(200).json(newResume)
+      } catch (error) {
+        res.status(500).json({ message: 'Ошибка создания резюме' });
+      }
+    })
+
+    // Обработка GET-запроса для получения всех резюме
+    app.get('/resumes', async (req, res) => {
+    try {
+      const resumesList = await resumes.findAll({
+      attributes: ['workerId', 'workerName', 'skills', 'text'],
+      });
+      res.status(200).json(resumesList);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Failed to fetch resumes' });
+  }
+});
   
 
     // Запуск сервера

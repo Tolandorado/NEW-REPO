@@ -37,7 +37,7 @@ const Register = () => {
   };
 
   return (
- <>
+ <div>
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="name">Имя:</label>
@@ -60,7 +60,7 @@ const Register = () => {
       <button type="submit">Зарегистрироваться</button>
     </form>
    <Link to="/login">Вход</Link>
- </>
+ </div>
   );
 };
 

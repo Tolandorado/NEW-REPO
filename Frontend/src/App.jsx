@@ -2,15 +2,16 @@ import { useSelector } from 'react-redux'
 import { Route, Routes, Navigate } from 'react-router-dom'
 import Register from '../components/register'
 import Login  from '../components/login'
-import Home from '../components/home'
+import Home from '../components/homePage/home'
 import ResumeForm from '../components/resumeForm'
 import ResumesList from '../components/resumesList'
+import styles from './index.module.scss';
 
 function App() {
 const user = useSelector((state) => state.user)
 console.log(user)
   return (
-    <>
+    <div className={styles.container}>
    <Routes>
         {/* Маршрут для регистрации, доступный только если пользователь не авторизован */}
         <Route 
@@ -34,7 +35,7 @@ console.log(user)
           path='/resumes-list'
           element={<ResumesList />}/>
       </Routes>
-    </>
+    </div>
     
   )
 }

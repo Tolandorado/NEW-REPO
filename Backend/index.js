@@ -46,6 +46,9 @@ const resumes = sequelize.define('resumes', {
   text: {
     type: DataTypes.TEXT,
   },
+  phoneNumber: { // Добавлено поле для номера телефона
+    type: DataTypes.STRING,
+  },
 });
 
 // Создание таблицы в базе данных
@@ -122,9 +125,9 @@ const startServer = async () => {
   
     //Маршрут для создания резюме
     app.post('/add-resume', async (req, res) => {
-      const {workerId, workerName, skills, text} = req.body
+      const {workerId, workerName, skills, text, phoneNumber} = req.body
       try {
-        const newResume = await resumes.create({workerId, workerName, skills, text})
+        const newResume = await resumes.create({workerId, workerName, skills, text, phoneNumber})
         res.status(200).json(newResume)
       } catch (error) {
         res.status(500).json({ message: 'Ошибка создания резюме' });
@@ -135,7 +138,7 @@ const startServer = async () => {
     app.get('/resumes', async (req, res) => {
     try {
       const resumesList = await resumes.findAll({
-      attributes: ['workerId', 'workerName', 'skills', 'text'],
+      attributes: ['workerId', 'workerName', 'skills', 'text', 'phoneNumber'],
       });
       res.status(200).json(resumesList);
     } catch (error) {

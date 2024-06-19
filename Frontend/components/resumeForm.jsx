@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import PhoneInput from 'react-phone-number-input';
 
 const ResumeForm = () => {
     const dispatch = useDispatch();
@@ -9,6 +10,7 @@ const ResumeForm = () => {
     const [skills, setSkills] = useState([]);
     const [newSkill, setNewSkill] = useState('');
     const [text, setText] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
   
     const navigate = useNavigate(); 
     // Добавление скилла в массив
@@ -32,6 +34,7 @@ const ResumeForm = () => {
             workerName,
             skills,
             text,
+            phoneNumber
           }),
         });
     
@@ -45,6 +48,7 @@ const ResumeForm = () => {
           setNewSkill(''); // Очистка поля ввода навыков
           setText(''); // 
           navigate('/')
+          setPhoneNumber('')
           // ...
         } else {
           // Обработка ошибки
@@ -77,6 +81,15 @@ const ResumeForm = () => {
               onChange={(e) => setText(e.target.value)}
             />
                 </div>
+
+                <div>
+              <label htmlFor="phoneNumber">Номер телефона:</label> 
+              <PhoneInput
+                placeholder="Введите номер телефона"
+                value={phoneNumber}
+                onChange={setPhoneNumber} 
+              /> 
+            </div>
     
                 <div>
                     <label htmlFor="skills">Навыки:</label>
